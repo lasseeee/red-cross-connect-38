@@ -122,8 +122,30 @@ function MatchDesk() {
       maxMinutes,
       maxKm,
       requireActivity,
+      interest,
+      gender,
+      ageMin,
+      ageMax,
+      nonSmokersOnly,
+      respectGenderPreference,
+      petFriendlyOnly,
     }).filter((s) => (onlyFree ? s.hasCapacity : true));
-  }, [selected, volunteers, mode, maxMinutes, maxKm, requireActivity, onlyFree]);
+  }, [
+    selected,
+    volunteers,
+    mode,
+    maxMinutes,
+    maxKm,
+    requireActivity,
+    onlyFree,
+    interest,
+    gender,
+    ageMin,
+    ageMax,
+    nonSmokersOnly,
+    respectGenderPreference,
+    petFriendlyOnly,
+  ]);
 
   const mapVolunteers: MapVolunteer[] = useMemo(() => {
     const area = selected ? districtById(selected.districtId) : null;
