@@ -19,6 +19,15 @@
  */
 
 @theme inline {
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --shadow-panel: 0 1px 2px oklch(0.2 0.02 20 / 0.06), 0 8px 24px oklch(0.2 0.02 20 / 0.08);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,26 +71,32 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.5rem;
+  --background: oklch(0.985 0.004 60);
+  --foreground: oklch(0.22 0.02 25);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.22 0.02 25);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --popover-foreground: oklch(0.22 0.02 25);
+  --primary: oklch(0.53 0.22 26.5);
+  --primary-foreground: oklch(0.99 0.005 60);
+  --brand: oklch(0.53 0.22 26.5);
+  --brand-foreground: oklch(0.99 0.005 60);
+  --surface: oklch(1 0 0);
+  --surface-muted: oklch(0.965 0.006 60);
+  --success: oklch(0.55 0.13 155);
+  --warning: oklch(0.72 0.16 70);
+  --secondary: oklch(0.955 0.008 40);
+  --secondary-foreground: oklch(0.3 0.03 25);
+  --muted: oklch(0.955 0.008 40);
+  --muted-foreground: oklch(0.52 0.02 30);
+  --accent: oklch(0.94 0.03 30);
+  --accent-foreground: oklch(0.3 0.05 25);
+  --destructive: oklch(0.53 0.22 26.5);
+  --destructive-foreground: oklch(0.99 0.005 60);
+  --border: oklch(0.9 0.008 40);
+  --input: oklch(0.9 0.008 40);
+  --ring: oklch(0.53 0.22 26.5);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +155,48 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Leaflet surface tuned to the design system */
+.leaflet-container {
+  background: var(--color-surface-muted);
+  font-family: var(--font-sans);
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: color-mix(in oklch, var(--color-surface) 85%, transparent);
+}
+
+.rk-pin {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid var(--color-surface);
+  box-shadow: var(--shadow-panel);
+}
+
+.rk-pin-volunteer {
+  background: var(--color-brand);
+  color: var(--color-brand-foreground);
+}
+
+.rk-pin-volunteer-dim {
+  background: color-mix(in oklch, var(--color-brand) 35%, white);
+  color: var(--color-brand-foreground);
+}
+
+.rk-pin-selected {
+  outline: 3px solid color-mix(in oklch, var(--color-brand) 40%, transparent);
 }
