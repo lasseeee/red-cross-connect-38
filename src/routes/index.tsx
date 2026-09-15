@@ -4,9 +4,14 @@ import { lazy, Suspense, useMemo, useState } from "react";
 
 import {
   DISTRICTS,
+  GENDERS,
+  INTERESTS,
   PARTICIPANTS,
   VOLUNTEERS,
   districtById,
+  genderLabel,
+  type Gender,
+  type Interest,
   type Participant,
   type TravelMode,
   type Volunteer,
@@ -80,6 +85,14 @@ function MatchDesk() {
   const [onlyFree, setOnlyFree] = useState(false);
   const [districtFilter, setDistrictFilter] = useState<string>("all");
   const [query, setQuery] = useState("");
+  const [interest, setInterest] = useState<Interest | "any">("any");
+  const [gender, setGender] = useState<Gender | "any">("any");
+  const [ageMin, setAgeMin] = useState(18);
+  const [ageMax, setAgeMax] = useState(90);
+  const [nonSmokersOnly, setNonSmokersOnly] = useState(false);
+  const [respectGenderPreference, setRespectGenderPreference] = useState(true);
+  const [petFriendlyOnly, setPetFriendlyOnly] = useState(false);
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   const queue = useMemo(
     () =>
@@ -109,8 +122,30 @@ function MatchDesk() {
       maxMinutes,
       maxKm,
       requireActivity,
+      interest,
+      gender,
+      ageMin,
+      ageMax,
+      nonSmokersOnly,
+      respectGenderPreference,
+      petFriendlyOnly,
     }).filter((s) => (onlyFree ? s.hasCapacity : true));
-  }, [selected, volunteers, mode, maxMinutes, maxKm, requireActivity, onlyFree]);
+  }, [
+    selected,
+    volunteers,
+    mode,
+    maxMinutes,
+    maxKm,
+    requireActivity,
+    onlyFree,
+    interest,
+    gender,
+    ageMin,
+    ageMax,
+    nonSmokersOnly,
+    respectGenderPreference,
+    petFriendlyOnly,
+  ]);
 
   const mapVolunteers: MapVolunteer[] = useMemo(() => {
     const area = selected ? districtById(selected.districtId) : null;
