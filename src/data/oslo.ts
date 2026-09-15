@@ -69,7 +69,7 @@ export type Participant = {
   note: string;
   waitingSinceDays: number;
   status: "waiting" | "matched";
-  matchedVolunteerId?: string;
+  matchedVolunteerId?: string | undefined;
 };
 
 export const VOLUNTEERS: Volunteer[] = [
