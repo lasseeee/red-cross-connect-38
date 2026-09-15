@@ -45,6 +45,28 @@ export const ACTIVITIES = [
 
 export type Activity = (typeof ACTIVITIES)[number];
 
+export const INTERESTS = [
+  "Music",
+  "Cooking",
+  "Football",
+  "Hiking",
+  "Reading",
+  "Handicraft",
+  "Gardening",
+  "Board games",
+  "Film",
+  "Technology",
+  "Animals",
+  "Art",
+] as const;
+
+export type Interest = (typeof INTERESTS)[number];
+
+export type Gender = "female" | "male" | "other";
+export const GENDERS: Gender[] = ["female", "male", "other"];
+export const genderLabel = (g: Gender) =>
+  g === "female" ? "Woman" : g === "male" ? "Man" : "Other";
+
 export type Volunteer = {
   id: string;
   name: string;
@@ -57,6 +79,13 @@ export type Volunteer = {
   modes: TravelMode[];
   capacity: number;
   assigned: number;
+  age: number;
+  gender: Gender;
+  smoker: boolean;
+  /** Comfortable visiting homes with pets. */
+  okWithPets: boolean;
+  hasPets: boolean;
+  interests: Interest[];
 };
 
 export type Participant = {
@@ -70,6 +99,14 @@ export type Participant = {
   waitingSinceDays: number;
   status: "waiting" | "matched";
   matchedVolunteerId?: string | undefined;
+  age: number;
+  gender: Gender;
+  /** Preferred gender of the volunteer, "any" when it does not matter. */
+  prefersGender: Gender | "any";
+  /** Asks for a non-smoking volunteer. */
+  wantsNonSmoker: boolean;
+  hasPets: boolean;
+  interests: Interest[];
 };
 
 export const VOLUNTEERS: Volunteer[] = [
@@ -85,6 +122,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["transit", "bike"],
     capacity: 2,
     assigned: 0,
+    age: 34,
+    gender: "female",
+    smoker: false,
+    okWithPets: true,
+    hasPets: true,
+    interests: ["Music", "Hiking", "Cooking"],
   },
   {
     id: "v2",
@@ -98,6 +141,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["transit", "car"],
     capacity: 3,
     assigned: 1,
+    age: 41,
+    gender: "male",
+    smoker: false,
+    okWithPets: true,
+    hasPets: false,
+    interests: ["Football", "Reading", "Cooking"],
   },
   {
     id: "v3",
@@ -111,6 +160,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["car"],
     capacity: 2,
     assigned: 0,
+    age: 67,
+    gender: "female",
+    smoker: false,
+    okWithPets: false,
+    hasPets: false,
+    interests: ["Gardening", "Handicraft", "Reading"],
   },
   {
     id: "v4",
@@ -124,6 +179,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["car", "bike"],
     capacity: 1,
     assigned: 0,
+    age: 52,
+    gender: "male",
+    smoker: true,
+    okWithPets: true,
+    hasPets: true,
+    interests: ["Hiking", "Animals", "Football"],
   },
   {
     id: "v5",
@@ -137,6 +198,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["transit"],
     capacity: 2,
     assigned: 0,
+    age: 28,
+    gender: "female",
+    smoker: false,
+    okWithPets: true,
+    hasPets: false,
+    interests: ["Reading", "Film", "Board games"],
   },
   {
     id: "v6",
@@ -150,6 +217,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["car", "transit"],
     capacity: 3,
     assigned: 2,
+    age: 71,
+    gender: "male",
+    smoker: true,
+    okWithPets: true,
+    hasPets: false,
+    interests: ["Gardening", "Board games", "Music"],
   },
   {
     id: "v7",
@@ -163,6 +236,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["transit", "bike"],
     capacity: 2,
     assigned: 0,
+    age: 37,
+    gender: "female",
+    smoker: false,
+    okWithPets: false,
+    hasPets: false,
+    interests: ["Cooking", "Art", "Reading"],
   },
   {
     id: "v8",
@@ -176,6 +255,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["bike", "transit"],
     capacity: 2,
     assigned: 1,
+    age: 24,
+    gender: "male",
+    smoker: false,
+    okWithPets: true,
+    hasPets: false,
+    interests: ["Technology", "Film", "Football"],
   },
   {
     id: "v9",
@@ -189,6 +274,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["car", "bike"],
     capacity: 2,
     assigned: 0,
+    age: 59,
+    gender: "female",
+    smoker: false,
+    okWithPets: true,
+    hasPets: true,
+    interests: ["Animals", "Hiking", "Handicraft"],
   },
   {
     id: "v10",
@@ -202,6 +293,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["bike", "transit"],
     capacity: 1,
     assigned: 0,
+    age: 31,
+    gender: "male",
+    smoker: false,
+    okWithPets: true,
+    hasPets: false,
+    interests: ["Technology", "Music", "Cooking"],
   },
   {
     id: "v11",
@@ -215,6 +312,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["transit", "car"],
     capacity: 3,
     assigned: 1,
+    age: 46,
+    gender: "female",
+    smoker: false,
+    okWithPets: true,
+    hasPets: true,
+    interests: ["Board games", "Reading", "Art"],
   },
   {
     id: "v12",
@@ -228,6 +331,12 @@ export const VOLUNTEERS: Volunteer[] = [
     modes: ["car"],
     capacity: 2,
     assigned: 0,
+    age: 63,
+    gender: "male",
+    smoker: false,
+    okWithPets: true,
+    hasPets: false,
+    interests: ["Technology", "Gardening", "Film"],
   },
 ];
 
@@ -242,6 +351,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Lives alone, wants weekly company and short walks.",
     waitingSinceDays: 21,
     status: "waiting",
+    age: 78,
+    gender: "female",
+    prefersGender: "female",
+    wantsNonSmoker: true,
+    hasPets: true,
+    interests: ["Music", "Handicraft", "Animals"],
   },
   {
     id: "p2",
@@ -253,6 +368,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Two children in 5th and 7th grade, needs maths support.",
     waitingSinceDays: 9,
     status: "waiting",
+    age: 39,
+    gender: "female",
+    prefersGender: "any",
+    wantsNonSmoker: true,
+    hasPets: false,
+    interests: ["Reading", "Board games", "Film"],
   },
   {
     id: "p3",
@@ -264,6 +385,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Recently arrived, wants weekly Norwegian conversation.",
     waitingSinceDays: 34,
     status: "waiting",
+    age: 26,
+    gender: "female",
+    prefersGender: "female",
+    wantsNonSmoker: true,
+    hasPets: false,
+    interests: ["Cooking", "Art", "Music"],
   },
   {
     id: "p4",
@@ -275,6 +402,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Reduced mobility, needs company for short outdoor walks.",
     waitingSinceDays: 5,
     status: "waiting",
+    age: 82,
+    gender: "male",
+    prefersGender: "any",
+    wantsNonSmoker: false,
+    hasPets: true,
+    interests: ["Hiking", "Animals", "Football"],
   },
   {
     id: "p5",
@@ -286,6 +419,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Wants help with phone, banking app and public services online.",
     waitingSinceDays: 14,
     status: "waiting",
+    age: 74,
+    gender: "female",
+    prefersGender: "any",
+    wantsNonSmoker: true,
+    hasPets: false,
+    interests: ["Technology", "Gardening", "Music"],
   },
   {
     id: "p6",
@@ -297,6 +436,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Isolated after illness, prefers visits at home.",
     waitingSinceDays: 42,
     status: "waiting",
+    age: 55,
+    gender: "female",
+    prefersGender: "female",
+    wantsNonSmoker: true,
+    hasPets: true,
+    interests: ["Board games", "Reading", "Art"],
   },
   {
     id: "p7",
@@ -308,6 +453,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Retired, would like a walking partner twice a week.",
     waitingSinceDays: 11,
     status: "waiting",
+    age: 69,
+    gender: "male",
+    prefersGender: "male",
+    wantsNonSmoker: false,
+    hasPets: false,
+    interests: ["Hiking", "Film", "Football"],
   },
   {
     id: "p8",
@@ -319,6 +470,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Needs practical help with shopping every other week.",
     waitingSinceDays: 18,
     status: "waiting",
+    age: 80,
+    gender: "male",
+    prefersGender: "any",
+    wantsNonSmoker: true,
+    hasPets: false,
+    interests: ["Technology", "Music", "Gardening"],
   },
   {
     id: "p9",
@@ -330,6 +487,12 @@ export const PARTICIPANTS: Participant[] = [
     note: "Father of three, wants to practise Norwegian with family.",
     waitingSinceDays: 27,
     status: "waiting",
+    age: 44,
+    gender: "male",
+    prefersGender: "male",
+    wantsNonSmoker: true,
+    hasPets: false,
+    interests: ["Football", "Cooking", "Reading"],
   },
   {
     id: "p10",
@@ -341,5 +504,11 @@ export const PARTICIPANTS: Participant[] = [
     note: "Widowed last year, wants regular contact.",
     waitingSinceDays: 7,
     status: "waiting",
+    age: 76,
+    gender: "female",
+    prefersGender: "any",
+    wantsNonSmoker: false,
+    hasPets: false,
+    interests: ["Gardening", "Board games", "Music"],
   },
 ];
