@@ -85,6 +85,14 @@ function MatchDesk() {
   const [onlyFree, setOnlyFree] = useState(false);
   const [districtFilter, setDistrictFilter] = useState<string>("all");
   const [query, setQuery] = useState("");
+  const [interest, setInterest] = useState<Interest | "any">("any");
+  const [gender, setGender] = useState<Gender | "any">("any");
+  const [ageMin, setAgeMin] = useState(18);
+  const [ageMax, setAgeMax] = useState(90);
+  const [nonSmokersOnly, setNonSmokersOnly] = useState(false);
+  const [respectGenderPreference, setRespectGenderPreference] = useState(true);
+  const [petFriendlyOnly, setPetFriendlyOnly] = useState(false);
+  const [showMoreFilters, setShowMoreFilters] = useState(false);
 
   const queue = useMemo(
     () =>
