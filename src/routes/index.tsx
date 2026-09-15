@@ -4,9 +4,14 @@ import { lazy, Suspense, useMemo, useState } from "react";
 
 import {
   DISTRICTS,
+  GENDERS,
+  INTERESTS,
   PARTICIPANTS,
   VOLUNTEERS,
   districtById,
+  genderLabel,
+  type Gender,
+  type Interest,
   type Participant,
   type TravelMode,
   type Volunteer,
